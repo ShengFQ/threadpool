@@ -16,7 +16,7 @@ public class Producer implements Runnable {
     }
 @Override
     public void run() {
-        String data = null;
+    String data = null;
         Random r = new Random();
 
         System.out.println("启动生产者线程！");
@@ -46,6 +46,6 @@ public class Producer implements Runnable {
     private volatile boolean      isRunning               = true;
     private BlockingQueue queue;
     private static AtomicInteger  count                   = new AtomicInteger();
-    private static final int      DEFAULT_RANGE_FOR_SLEEP = 1000;
+    private static final int      DEFAULT_RANGE_FOR_SLEEP = 3000;
 
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Consumer implements Runnable {
 
-    public Consumer(BlockingQueue<String> queue) {
+    public Consumer(BlockingQueue queue) {
         this.queue = queue;
     }
 
@@ -22,7 +22,8 @@ public class Consumer implements Runnable {
         try {
             while (isRunning) {
                 System.out.println("正从队列获取数据...");
-                String data = queue.poll(2, TimeUnit.SECONDS);
+                //可以设置超时时间
+                Object data = queue.poll(2,TimeUnit.SECONDS);
                 if (null != data) {
                     System.out.println("拿到数据：" + data);
                     System.out.println("正在消费数据：" + data);
@@ -39,7 +40,10 @@ public class Consumer implements Runnable {
             System.out.println("退出消费者线程！");
         }
     }
-
-    private BlockingQueue<String> queue;
+    public void stop() {
+        isRunning = false;
+    }
+    private volatile boolean      isRunning               = true;
+    private BlockingQueue queue;
     private static final int      DEFAULT_RANGE_FOR_SLEEP = 1000;
 }
