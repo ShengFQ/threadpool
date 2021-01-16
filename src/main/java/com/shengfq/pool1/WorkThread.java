@@ -1,8 +1,16 @@
 package com.shengfq.pool1;
 
 import java.util.concurrent.BlockingQueue;
-
+/**
+ * @title 工作线程 消费者
+ * @author shengfq
+ * @date 2020-12-08
+ * */
 public class WorkThread extends Thread {
+	/**
+	 * 阻塞队列
+	 * 存储任务
+	 * */
 	private BlockingQueue<Task> taskQueue=null;
 	private boolean isStopped=false;
 	public void setStopped(boolean isStopped) {

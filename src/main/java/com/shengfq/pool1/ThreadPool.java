@@ -4,11 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-
+/**
+ * @title 线程池
+ * @author shengfq
+ * @date 2020-12-08
+ * */
 public class ThreadPool {
+	//阻塞队列
 	private BlockingQueue<Task> taskQueue=null;
+	//线程池集合
 	private List<WorkThread> threads=new ArrayList<WorkThread>();
 	private boolean isStopped=false;
+	/**
+	 * 构造函数
+	 * */
 	public ThreadPool(int noOfThreads,int maxNoOfTasks){
 		taskQueue=new LinkedBlockingQueue<Task>(maxNoOfTasks);
 		for(int i=0;i<noOfThreads;i++){
@@ -18,7 +27,9 @@ public class ThreadPool {
 			thread.start();
 		}
 	}
-	
+	/**
+	 * 任务生产者
+	 * */
 	public  void addTask(Task task){
 		if(this.isStopped) throw
 		new IllegalStateException("thread pool is stopped");

@@ -6,8 +6,7 @@ package com.shengfq.lang;
  * */
 public class StringConvert {
     public static void main(String[] args) {
-        getMac();
-        getImei();
+        printAscII();
     }
 
     public static void getImei(){
@@ -31,5 +30,12 @@ public class StringConvert {
             bleMac.delete(bleMac.lastIndexOf(":"), bleMac.length());
         }
         System.out.println(bleMac);
+    }
+    /**
+     * 打印ASCII码字符串
+     * */
+    public  static void printAscII(){
+        char asc=0x68;
+        System.out.println(asc);
     }
 }

@@ -1,9 +1,13 @@
 package com.shengfq.pool1;
-
+/**
+ * @title 测试入口
+ * @author shengfq
+ * @date 2020-12-08
+ * */
 public class TestThreadPool {
 	public static void main(String[] args) {
 		int poolSize = 20;
-		int jobs = 20;
+		int jobs = 120;
 		long timePool = 0;
 		args = new String[] { "10", "50" };
 		if (args.length < 2) {
@@ -11,8 +15,8 @@ public class TestThreadPool {
 			System.exit(-1);
 		}
 		try {
-			poolSize = Integer.parseInt(args[0]);
-			jobs = Integer.parseInt(args[1]);
+			//poolSize = Integer.parseInt(args[0]);
+			//jobs = Integer.parseInt(args[1]);
 		} catch (Exception ex) {
 			System.out.println("Please input integer.");
 			System.exit(-1);

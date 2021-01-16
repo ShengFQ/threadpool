@@ -29,6 +29,8 @@ public class SimpleHashMap implements ISimpleMap {
         int hash = key.hashCode();
         //根据哈希码计算存储位置
         int index = hash % table.length;
+        //或者index = HashCode（Key） & （Length - 1）
+
         //存入指定位置
         if (table[index] == null) {
             //如果该位置没有元素，增加一个节点
@@ -106,6 +108,34 @@ public class SimpleHashMap implements ISimpleMap {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    /**
+     * 移除元素
+     *
+     * @param key
+     **/
+    @Override
+    public Object remove(Object key) {
+        //计算哈希码
+        int hash = key.hashCode();
+        //根据哈希码计算存储位置
+        int index = hash % table.length;
+        //查找对应的Entry
+        Entry entry = null;
+        if (table[index] != null) {
+            Entry currentEntry = table[index];
+            while (currentEntry != null) {
+                if (currentEntry.getKey().equals(key)) {
+                    entry = currentEntry;
+                    //队列中要删除该元素
+                    break;
+                }
+                currentEntry = currentEntry.next;
+            }
+
+        }
+        return entry == null ? null : entry.getValue();
     }
 
     /**

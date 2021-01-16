@@ -2,13 +2,17 @@ package com.shengfq.algorithm;
 
 /**
  * 数据结构:二叉查找树
+ *
  * */
 public class BinaryTree<T extends Comparable<T>> {
+	/**
+	 * 根节点
+	 * */
 	private BSTNode<T> mRoot;
 
-	/*
+	/**
 	 * 定义 对于任何一个不为空的左节点的值,左子树上所有的节点的值均小于它的跟节点的值
-	 * 对于任意节点的右子树不为空,则右子树上的所有节点的值均大于它的根节点的值. 左右子树叶分别是而叉搜索树 没有键值相等的节点
+	 * 对于任意节点的右子树不为空,则右子树上的所有节点的值均大于它的根节点的值. 左右子树叶分别是二叉搜索树 没有键值相等的节点
 	 */
 	public class BSTNode<T extends Comparable<T>> {
 		T key;
@@ -25,9 +29,9 @@ public class BinaryTree<T extends Comparable<T>> {
 		}
 	}
 
-	/*
-	 * 遍历算法
-	 * 
+	/**
+	 * 前序遍历算法
+	 * preOrder(r) = print r ---> preOrder(r->left) ---> preOrder(r->right)
 	 * *
 	 */
 	private void preOrder(BSTNode<T> tree) {
@@ -42,6 +46,10 @@ public class BinaryTree<T extends Comparable<T>> {
 		preOrder(mRoot);
 	}
 
+	/**
+	 * 中序遍历算法
+	 * inOrder(r) = inOrder(r--->left) ---> print r ---> inOrder(r->right)
+	 * */
 	private void inOrder(BSTNode<T> tree) {
 		if (tree != null) {
 			inOrder(tree.left);
@@ -54,6 +62,10 @@ public class BinaryTree<T extends Comparable<T>> {
 		inOrder(mRoot);
 	}
 
+	/**
+	 * 后序遍历算法
+	 * postOrder(r) = postOrder(r->left) ---> postOrder(r->right) --->print r
+	 * */
 	private void postOrder(BSTNode<T> tree) {
 		if (tree != null) {
 			postOrder(tree.left);
@@ -332,7 +344,7 @@ public class BinaryTree<T extends Comparable<T>> {
 		bt1.insert(2);
 		bt1.insert(6);
 		bt1.preOrder();
-		bt1.inOrder();
-		bt1.postOrder();
+		//bt1.inOrder();
+		//bt1.postOrder();
 	}
 }

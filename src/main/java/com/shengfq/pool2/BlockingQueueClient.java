@@ -10,8 +10,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  *  
  * @author syz 
  * @date 2014-7-2 
- * @version v1.0.0 
- * @see com.gbcom.java.blockqueue.BlockingQueueClient 
+ * @version v1.0.0
  */  
 public class BlockingQueueClient {  
   
