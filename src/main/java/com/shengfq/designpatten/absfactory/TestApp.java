@@ -4,8 +4,8 @@ public class TestApp {
 	private void test() {
 		Veggie tv, nv;
 		Fruit tf, nf;
-		TropicalGardener tg = new TropicalGardener();
-		NorthernGardener ng = new NorthernGardener();
+		Gardener tg = new TropicalGardener();
+		Gardener ng = new NorthernGardener();
 		tv = tg.createVeggie("热带菜叶");
 		nv = ng.createVeggie("东北甜菜");
 		tf = tg.createFruit("海南椰子");

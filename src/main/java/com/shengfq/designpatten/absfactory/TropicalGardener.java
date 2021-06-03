@@ -1,5 +1,8 @@
 package com.shengfq.designpatten.absfactory;
-
+/**
+ * 热带的园丁
+ * 生产热带的水果和蔬菜
+ * */
 public class TropicalGardener implements Gardener {
 
 	@Override
