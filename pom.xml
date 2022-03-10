@@ -10,12 +10,15 @@
   <properties>
     <java-version>1.8</java-version>
   </properties>
+
   <dependencies>
     <!-- 单元测试使用 -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.7.17</version>
     </dependency>
+
   </dependencies>
 
   <build>
