@@ -5,10 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
- * copyRight 二三三网络技术
- * className     com.shengfq.serilize.FastjsonDemo
- * description   TODO
- *
  * @author shengfq
  * @version 1.0
  * @date 2022/3/21 17:55
