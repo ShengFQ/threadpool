@@ -13,6 +13,6 @@ public class PageVo<T> implements Serializable {
     private int total;
 	private int pageNum;
 	private int pageSize;
-    private T t;
+    private T data;
 
 }
