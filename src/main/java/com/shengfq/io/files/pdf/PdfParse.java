@@ -1,5 +1,6 @@
 package com.shengfq.io.files.pdf;
 
+import cn.hutool.core.io.FileUtil;
 import com.spire.pdf.PdfDocument;
 import com.spire.pdf.fields.PdfField;
 import com.spire.pdf.widget.*;
@@ -15,18 +16,33 @@ import java.io.IOException;
  * @date: 2022/12/19 2:44 下午
  */
 public class PdfParse {
+    private static String DOC1="/Users/sheng/schedule/target&plan&schedule&task/杭州煋辰数智科技[进行]/资金查控管理系统/1法律文书/协助冻结财产通知书_2021120213385684C429DE124C78A90E.pdf";
     //DOC2能够导出文档部分内容,表单内容都读取不出来
-    private static String DOC2="/Users/sheng/schedule/target&plan&schedule&task/杭州煋辰数智科技[进行]/资金查控管理系统/1法律文书/协助冻结财产通知书.pdf";
-
+    private static String DOC2="/Users/sheng/schedule/target&plan&schedule&task/杭州煋辰数智科技[进行]/资金查控管理系统/1法律文书/协助冻结财产通知书_20211202133651C340F7B04E3A641BAE.pdf";
+    static String txtSuffix=".txt";
     public static void main(String[] args) {
+       // test1(DOC2);
         System.out.println("------------");
-        test3();
+       // test3();
         System.out.println("------------");
         test4();
-        System.out.println("------------");
-        test5();
+
     }
 
+    public static void test1(String pdfPath){
+        boolean validate=   FileUtil.exist(pdfPath);
+        System.out.println("exist:"+validate);
+       String abs= FileUtil.getAbsolutePath(pdfPath);
+      String name=  FileUtil.getName(pdfPath);
+      String mimeType=FileUtil.getMimeType(pdfPath);
+      String suffix=FileUtil.getSuffix(name);
+      String prefix=FileUtil.getPrefix(name);
+      String dirPath= FileUtil.getParent(pdfPath,1) ;
+      System.out.println("absPath:"+abs+ " name :"+name +" mimeType:"+mimeType+" suffix:"+suffix+" prefix:"+prefix);
+        System.out.println("dirPath:"+dirPath);
+        String txtPath=dirPath+prefix+txtSuffix;
+        System.out.println("txtPath:"+txtPath);
+    }
     /**
      * 获取指定表单域的值
      * 测试成功
@@ -57,7 +73,7 @@ public class PdfParse {
     public static void test4() {
         //加载PDF文档
         PdfDocument pdf = new PdfDocument();
-        pdf.loadFromFile(DOC2);
+        pdf.loadFromFile(DOC1);
 
         //获取表单域
         PdfFormWidget formWidget = (PdfFormWidget)pdf.getForm();
@@ -72,8 +88,9 @@ public class PdfParse {
             if (field instanceof PdfTextBoxFieldWidget)
             {
                 PdfTextBoxFieldWidget textBoxField = (PdfTextBoxFieldWidget)field ;
+                String name=textBoxField.getName();
                 String text = textBoxField.getText();
-                sb.append("文本框内容： " + text + "\r\n");
+                sb.append(name).append("=").append(text).append("\n");
             }
 
             //获取列表框的值
@@ -132,7 +149,7 @@ public class PdfParse {
 
         try {
             //将文本写入 .txt文件
-            FileWriter writer = new FileWriter("GetAllFormfieldValues.txt");
+            FileWriter writer = new FileWriter("GetAllFormfieldValues.properties");
             writer.write(sb.toString());
             writer.flush();
         } catch (IOException e) {
