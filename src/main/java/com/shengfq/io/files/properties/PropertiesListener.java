@@ -1,26 +1,33 @@
 package com.shengfq.io.files.properties;
 
-import org.springframework.boot.context.event.ApplicationStartedEvent;
-import org.springframework.context.ApplicationListener;
+import org.springframework.beans.BeansException;
+
+import java.util.Map;
+import java.util.Properties;
 
 /**
- * 配置文件监听器，用来加载自定义配置文件
- *
- * @author <a href="mailto:yadong.zhang0415@gmail.com">yadong.zhang</a>
- * @date 2017年6月1日 下午3:38:25
- * @version V1.0
- * @since JDK ： 1.7
- */
-public class PropertiesListener implements ApplicationListener<ApplicationStartedEvent> {
+ * 属性文件读取工厂
+ * @author shengfq
+ * @date 2022-12-20
+ * */
+public interface PropertiesListener {
 
-    private String propertyFileName;
+    /**
+     * 处理属性文件
+     * */
+    void processProperties(Properties props) throws BeansException;
+    /**
+     * 根据文件路径读取文件
+     * */
+    void loadAllProperties(String propertyFileName);
+    /**
+     * 根据key获取value
+     * */
+    String getProperty(String name);
+    /**
+     * 获取所有的属性值
+     * */
+    Map<String, String> getAllProperty();
 
-    public PropertiesListener(String propertyFileName) {
-        this.propertyFileName = propertyFileName;
-    }
-
-    @Override
-    public void onApplicationEvent(ApplicationStartedEvent event) {
-        PropertiesListenerConfig.loadAllProperties(propertyFileName);
-    }
+    AbsContent getContent();
 }

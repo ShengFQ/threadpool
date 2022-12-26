@@ -1,12 +1,8 @@
 package com.shengfq.io.files.pdf;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.pdfbox.text.PDFTextStripperByArea;
-
-import java.awt.*;
-import java.io.File;
+import com.shengfq.io.files.properties.AbsContent;
+import com.shengfq.io.files.properties.AbsPropertiesFactory;
+import com.shengfq.io.files.properties.Xzdjtzs;
 
 /**
  * ClassName: TestPdfParse
@@ -20,37 +16,20 @@ public class TestPdfParse {
     private static String DOC1="/Users/sheng/schedule/target&plan&schedule&task/杭州煋辰数智科技[进行]/资金查控管理系统/1法律文书/法律文书.pdf";
     //DOC2能够导出文档部分内容,表单内容都读取不出来
     private static String DOC2="/Users/sheng/schedule/target&plan&schedule&task/杭州煋辰数智科技[进行]/资金查控管理系统/1法律文书/协助冻结财产通知书.pdf";
+
+    private static  String DOC3="/Users/sheng/schedule/target&plan&schedule&task/杭州煋辰数智科技[进行]/资金查控管理系统/1法律文书/协助冻结财产通知书.properties";
     public static void main(String[] args) throws  Exception{
-
+       //String txt= PDFParseUtils.writeTxt(DOC2);
+        //System.out.println("txt:"+txt);
+        AbsPropertiesFactory factory=new AbsPropertiesFactory(DOC3);
+       AbsContent absContent= factory.getContent();
+       if(absContent instanceof Xzdjtzs){
+           Xzdjtzs item=(Xzdjtzs) absContent;
+           System.out.println(item.toString());
+       }
+       //Map<String,String> all= factory.getAllProperty();
+       // System.out.println(all);
+        System.out.println("---------end ----------");
     }
-
-    public static void test1() throws Exception {
-        PDDocument pdDocument = PDDocument.load(new File(DOC2));
-        if (pdDocument.isEncrypted()) {//加密
-            System.out.println("pdDocument.isEncrypted");
-            return;
-        }
-        PDPage page = pdDocument.getPage(0);//第一页
-        PDFTextStripperByArea pdfTextStripper = new PDFTextStripperByArea();//区域文本剥离器
-        pdfTextStripper.addRegion("region1", new Rectangle(0, 0, (int) page.getMediaBox().getWidth(), (int) page.getMediaBox().getHeight()));//区域大小
-        pdfTextStripper.extractRegions(page);//设置页
-        pdfTextStripper.setSortByPosition(true);//排序
-        String text = pdfTextStripper.getTextForRegion("region1");//剥离文本
-
-        System.out.println(text);
-        pdDocument.close();
-    }
-
-    private static void test2() throws Exception {
-        PDDocument pdDocument = PDDocument.load(new File(DOC2));
-        PDFTextStripper pdfTextStripper = new PDFTextStripper();
-        pdfTextStripper.setSortByPosition(true);
-        pdfTextStripper.setStartPage(0);
-        pdfTextStripper.setEndPage(1);
-        String text = pdfTextStripper.getText(pdDocument);
-        System.out.println(text);
-        pdDocument.close();
-    }
-
 
 }
