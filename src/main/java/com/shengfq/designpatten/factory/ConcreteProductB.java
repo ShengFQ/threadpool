@@ -5,19 +5,16 @@ public class ConcreteProductB implements AbsProduct {
 
 	@Override
 	public void plant() {
-		// TODO Auto-generated method stub
 		System.out.println("grape has been planted.");
 	}
 
 	@Override
 	public void grow() {
-		// TODO Auto-generated method stub
 		System.out.println("grape is growing..");
 	}
 
 	@Override
 	public void harvest() {
-		// TODO Auto-generated method stub
 		System.out.println("grape has been harvested.");
 	}
 
