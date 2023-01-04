@@ -69,7 +69,7 @@ public class AbsPropertiesFactory implements PropertiesListener{
      */
     @Override
     public String getProperty(String name) {
-        return propertiesMap.get(name).toString();
+        return propertiesMap.get(name);
     }
 
     /**

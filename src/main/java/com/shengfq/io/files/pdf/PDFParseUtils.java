@@ -2,6 +2,7 @@ package com.shengfq.io.files.pdf;
 
 import cn.hutool.core.io.FileUtil;
 import com.spire.pdf.PdfDocument;
+import com.spire.pdf.PdfPageBase;
 import com.spire.pdf.fields.PdfField;
 import com.spire.pdf.widget.PdfFormWidget;
 import com.spire.pdf.widget.PdfTextBoxFieldWidget;
@@ -48,7 +49,7 @@ public final class PDFParseUtils {
      * @param pdfPath pdf路径
      *
      * */
-    public static String writeTxt(String pdfPath){
+    public static String getPdfFormDocument(String pdfPath){
         String txtPath=null;
         validate(pdfPath);
         //加载PDF文档
@@ -57,6 +58,7 @@ public final class PDFParseUtils {
         //获取表单域
         PdfFormWidget formWidget = (PdfFormWidget)pdf.getForm();
         StringBuilder sb = new StringBuilder();
+        //获取文档名称和文书类型
         //遍历表单域控件集合并提取所有表单的值
         for (int i = 0; i < formWidget.getFieldsWidget().getCount(); i++) {
             PdfField field = (PdfField) formWidget.getFieldsWidget().getList().get(i);
@@ -67,6 +69,36 @@ public final class PDFParseUtils {
                 String text = textBoxField.getText();
                 sb.append(name).append("=").append(text).append("\n");
             }
+        }
+        try {
+            //将文本写入 .txt文件
+            txtPath=getTxtPath(pdfPath);
+            FileWriter writer = new FileWriter(txtPath);
+            writer.write(sb.toString());
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            pdf.close();
+        }
+        return txtPath;
+    }
+    /**
+     * 获取PDF文档的普通文本内容
+     * */
+    public static String getPdfTxtDocument(String pdfPath){
+        String txtPath=null;
+        validate(pdfPath);
+        //加载PDF文档
+        PdfDocument pdf = new PdfDocument();
+        pdf.loadFromFile(pdfPath);
+        //获取文档名称和文书类型
+        StringBuilder sb = new StringBuilder();
+        PdfPageBase page;
+        //遍历PDF页面，获取每个页面的文本并添加到StringBuilder对象
+        for(int i= 0;i<pdf.getPages().getCount();i++){
+            page = pdf.getPages().get(i);
+            sb.append(page.extractText(false));
         }
         try {
             //将文本写入 .txt文件
