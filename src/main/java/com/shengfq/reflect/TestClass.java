@@ -17,20 +17,17 @@ import java.util.List;
 public class TestClass {
 
     public static void classObjectOne(){
-        TestClass run=new TestClass();
-       Class<Fruits> fruitsClass1=(Class<Fruits>) run.getClassObject1();
-        Class<Fruits> fruitsClass2=(Class<Fruits>) run.getClassObject2();
-        Class<Fruits> fruitsClass3=(Class<Fruits>) run.getClassObject3();
+        TestClass testClass =new TestClass();
+       Class<Fruits> fruitsClass1=(Class<Fruits>) testClass.getClassObject1();
+        Class<Fruits> fruitsClass2=(Class<Fruits>) testClass.getClassObject2();
+        Class<Fruits> fruitsClass3=(Class<Fruits>) testClass.getClassObject3();
         if(fruitsClass3==fruitsClass1 && fruitsClass2==fruitsClass3 && fruitsClass2==fruitsClass1){
             System.out.println("class object is only one");
         }else{
             System.out.println("they are not equal");
         }
-       /*Method[] methods=fruitsClass.getMethods();
-       for (Method method :methods){
-           String methodName=method.getName();
-           System.out.println("method:"+methodName);
-       }*/
+
+
     }
     /**
      * class对象的获取方法
@@ -162,11 +159,7 @@ public class TestClass {
     }
 
 
-    public static void main(String[] args) throws Exception {
-        reflectList();
-        System.out.println("-------------");
 
-    }
     /**
      * 通过Class的反射API,可以绕过泛型的类型检测,达到往泛型集合添加不同类型元素的目的.
      * */
@@ -179,4 +172,32 @@ public class TestClass {
         System.out.println(list2.size());
     }
 
+    public static void main(String[] args) throws Exception {
+        String classAllPath = "com.shengfq.reflect.Fruits";
+        //1.获取到Car类对应的Class对象
+        //<?>表示不确定的Java类型
+        Class<?>cls = Class.forName(classAllPath);
+        //2.输出cls
+        System.out.println(cls);//显示cls对象,是哪个类的Class对象  com.gbx.Car
+        System.out.println(cls.getClass());//输出运行类型 java.lang.Class
+        //3.得到包名
+        System.out.println(cls.getPackage().getName());//包名
+        //4,得到全类名
+        System.out.println(cls.getName());
+        //5.通过cls创建对象实例
+        Fruits fruits =(Fruits)cls.newInstance();
+        System.out.println(fruits);//fruits.toString()
+        //6.通过反射获取属性 brand
+        Field name = cls.getField("name");
+        System.out.println(name.get(fruits));
+        //7.通过反射给属性赋值
+        name.set(fruits,"奔驰");
+        System.out.println(name.get(fruits));
+        //8. 遍历得到所有属性
+        Field[] fields = cls.getFields();
+        System.out.println("遍历得到所有属性");
+        for (Field f:fields){
+            System.out.println(f.getName());//名称
+        }
+    }
 }

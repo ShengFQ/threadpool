@@ -4,12 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class Fruits {
-    private String name;
-    private int hot;
-    private int sugar;
+    public String name;
+    public int hot;
+    public int sugar;
 
     @Getter
-    private double weight;
+    public double weight;
 
     @Getter
     @Setter

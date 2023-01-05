@@ -20,14 +20,26 @@ public class Apple extends Fruits{
     }
     public static void test(String user) {
         try {
+            System.out.println("--------------class对象获取---------");
             ClassLoader loader = ClassLoader.getSystemClassLoader();
-            System.out.println("classloader testing...");
-            Class<?> loaderUser = loader.loadClass(user);
-            System.out.println("Animal " + loaderUser.getName());
-            System.out.println("---------------------------------------");
-            Class forNameUser = Class.forName(user);
-            System.out.println("Class.forName testing...");
-            System.out.println("Animal " + forNameUser.getName());
+            Class<?> class1 = loader.loadClass(user);
+            System.out.println("class Name: " + class1.getName());
+            System.out.println("----------------另外一种Class对象获取-----------------------");
+            Class class2 = Class.forName(user);
+            System.out.println("class Name:  " + class2.getName());
+            System.out.println("----------------另外一种Class对象获取-----------------------");
+            Class class3=com.shengfq.reflect.Animal.class;
+            System.out.println("class Name:  " + class3.getName());
+            if(class1==class2) {
+                System.out.println("class1==class2");
+            }
+            Animal animal1=new com.shengfq.reflect.Animal();
+            Class class4=animal1.getClass();
+            Animal animal2=new com.shengfq.reflect.Animal();
+            Class class5=animal2.getClass();
+            if(class4==class5){
+                System.out.println("class4==class5");
+            }
         } catch (ClassNotFoundException e){
             e.printStackTrace();
         }
