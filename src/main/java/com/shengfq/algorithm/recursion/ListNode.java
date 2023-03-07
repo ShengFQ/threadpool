@@ -1,4 +1,4 @@
-package com.shengfq.leecode.recursion;
+package com.shengfq.algorithm.recursion;
 /**
  * demo:翻转单链表
  * */

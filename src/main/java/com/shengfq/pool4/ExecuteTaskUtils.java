@@ -1,8 +1,4 @@
 package com.shengfq.pool4;
-import com.shengfq.utils.EssContextHolder;
-
-
-import java.util.Map;
 
 /**
  * @ClassName ExecuteTaskUtils
@@ -44,18 +40,11 @@ public class ExecuteTaskUtils {
      * @param callback
      */
     public static void submitTask(ITask task, ICallback callback) {
-        String sid = EssContextHolder.getSID();
-        String token = EssContextHolder.getToken();
-        String unionId = EssContextHolder.getUnionId();
         getInstance().submitTask(() -> {
             try {
-
-                EssContextHolder.setSID(sid);
-                EssContextHolder.setToken(token);
-                EssContextHolder.setUnionId(unionId);
-                task.executeTask();
+               boolean result= task.executeTask();
                 if (callback != null) {
-                    callback.callback(true);
+                    callback.callback(result);
                 }
             } catch (Exception e) {
                 if (callback != null) {

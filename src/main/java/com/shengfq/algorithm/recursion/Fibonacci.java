@@ -1,4 +1,4 @@
-package com.shengfq.leecode.recursion;
+package com.shengfq.algorithm.recursion;
 /**
  * 斐波那契数列
  * 递归算法

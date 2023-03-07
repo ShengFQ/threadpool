@@ -1,4 +1,4 @@
-package com.shengfq.leecode.recursion;
+package com.shengfq.algorithm.recursion;
 /**
  * 递归调用
  * 青蛙跳台阶

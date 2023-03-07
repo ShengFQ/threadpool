@@ -3,10 +3,8 @@ package com.shengfq.pool4;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+
 /**
  * 自定义线程池操作类
  * @author shengfq
@@ -21,7 +19,20 @@ class ExecuteTaskService {
      * @param task
      */
     public void submitTask(Runnable task) {
-        pools.execute(task);
+        //有返回值
+       Future<?> future= pools.submit(task);
+        try {
+           Object obj= future.get(100,TimeUnit.SECONDS);
+            System.out.println("任务结束获得结果:"+obj);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+        //无返回值
+      //  pools.execute(task);
     }
 
 
@@ -49,9 +60,9 @@ class ExecuteTaskService {
 
 
     private void initPool(int corePoolSize,int maxPoolSize){
-        ThreadFactory guavaThreadFactory = new ThreadFactoryBuilder().setNameFormat("ess-task-pool-%d").build();
+        ThreadFactory guavaThreadFactory = new ThreadFactoryBuilder().setNameFormat("task-pool-%d").build();
         pools = new ThreadPoolExecutor(corePoolSize, maxPoolSize, 10L,
-                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(10000),guavaThreadFactory, new ThreadPoolExecutor.CallerRunsPolicy());
+                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(1000),guavaThreadFactory, new ThreadPoolExecutor.CallerRunsPolicy());
 
     }
 }
