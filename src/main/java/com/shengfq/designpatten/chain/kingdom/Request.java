@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.shengfq.designpatten.chain;
+package com.shengfq.designpatten.chain.kingdom;
 
 import java.util.Objects;
 

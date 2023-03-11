@@ -1,16 +1,14 @@
 
-package com.shengfq.designpatten.chain;
+package com.shengfq.designpatten.chain.kingdom;
 
 /**
  *
- * OrcCommander 只能处理DEFEND_CASTLE的任务,其他任务无法处理
+ * OrcCommander 指挥官处理
+ * 只能处理DEFEND_CASTLE的任务,其他任务无法处理
  *
  */
 public class OrcCommander extends RequestHandler {
 
-  public OrcCommander(RequestHandler handler) {
-    super(handler);
-  }
 
   @Override
   public void handleRequest(Request req) {

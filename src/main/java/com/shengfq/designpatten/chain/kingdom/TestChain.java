@@ -1,4 +1,4 @@
-package com.shengfq.designpatten.chain;
+package com.shengfq.designpatten.chain.kingdom;
 
 /**
  * ClassName: TestChain
@@ -21,14 +21,14 @@ package com.shengfq.designpatten.chain;
 public class TestChain {
     public static void main(String[] args) {
         //实例化-建立handler链条 ,链条的每个环节顺序是可变的,处理者能处理的任务也是固定的,每个人只能干自己擅长的活,当出现了
-        OrcKing king = new OrcKing();
+        ChainFactoryBuilder builder=new ChainFactoryBuilder();
+
+        builder.makeRequest(new Request(RequestType.KING,"我是国王"));
         //当请求是DEFEND_CASTLE任务,只有command能处理
-        king.makeRequest(new Request(RequestType.DEFEND_CASTLE, "保卫城堡"));
-        //
-        king.makeRequest(new Request(RequestType.DEFEND_CASTLE, "保卫城堡"));
+        builder.makeRequest(new Request(RequestType.DEFEND_CASTLE, "保卫城堡"));
         //当请求是TORTURE_PRISONER,只有officer能处理
-        king.makeRequest(new Request(RequestType.TORTURE_PRISONER, "守卫监狱"));
+        builder.makeRequest(new Request(RequestType.TORTURE_PRISONER, "守卫监狱"));
         //当请求是COLLECT_TAX,只有soldier能处理
-        king.makeRequest(new Request(RequestType.COLLECT_TAX, "收集税收"));
+        builder.makeRequest(new Request(RequestType.COLLECT_TAX, "收集税收"));
     }
 }

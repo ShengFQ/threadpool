@@ -20,27 +20,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.shengfq.designpatten.chain;
+package com.shengfq.designpatten.chain.kingdom;
 
 /**
  *
  * OrcKing makes requests that are handled by the chain.
  *
  */
-public class OrcKing {
+public class OrcKing extends RequestHandler{
 
-  RequestHandler chain;
-
-  public OrcKing() {
-    buildChain();
+  @Override
+  public void handleRequest(Request req) {
+    //国王不参与任何执行,下发
+    super.handleRequest(req);
   }
 
-  private void buildChain() {
-    chain = new OrcCommander(new OrcOfficer(new OrcSoldier(null)));
+  @Override
+  public String toString() {
+    return "国王";
   }
-
-  public void makeRequest(Request req) {
-    chain.handleRequest(req);
-  }
-
 }

@@ -1,5 +1,5 @@
 
-package com.shengfq.designpatten.chain;
+package com.shengfq.designpatten.chain.kingdom;
 
 /**
  *
@@ -8,9 +8,6 @@ package com.shengfq.designpatten.chain;
  */
 public class OrcOfficer extends RequestHandler {
 
-  public OrcOfficer(RequestHandler handler) {
-    super(handler);
-  }
 
   @Override
   public void handleRequest(Request req) {
