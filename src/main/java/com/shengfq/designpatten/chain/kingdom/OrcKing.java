@@ -22,11 +22,14 @@
  */
 package com.shengfq.designpatten.chain.kingdom;
 
+import org.springframework.stereotype.Service;
+
 /**
  *
  * OrcKing makes requests that are handled by the chain.
  *
  */
+@Service
 public class OrcKing extends RequestHandler{
 
   @Override

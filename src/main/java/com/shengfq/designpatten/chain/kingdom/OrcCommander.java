@@ -1,12 +1,15 @@
 
 package com.shengfq.designpatten.chain.kingdom;
 
+import org.springframework.stereotype.Service;
+
 /**
  *
  * OrcCommander 指挥官处理
  * 只能处理DEFEND_CASTLE的任务,其他任务无法处理
  *
  */
+@Service
 public class OrcCommander extends RequestHandler {
 
 

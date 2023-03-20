@@ -1,11 +1,14 @@
 
 package com.shengfq.designpatten.chain.kingdom;
 
+import org.springframework.stereotype.Service;
+
 /**
  *
  * OrcSoldier 只能处理COLLECT_TAX 的任务,其他无法处理
  *
  */
+@Service
 public class OrcSoldier extends RequestHandler {
 
 
