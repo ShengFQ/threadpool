@@ -1,12 +1,11 @@
-package com.shengfq.serilize;
+package com.shengfq.serilize.fastjson;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * copyRight 二三三网络技术
- * className     com.shengfq.serilize.FastjsonDemo
+ * className     com.shengfq.serilize.fastjson.FastjsonDemo
  * description   TODO
  *
  * @author shengfq

@@ -1,7 +1,5 @@
 package com.shengfq.pool3;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
@@ -86,6 +84,7 @@ public class Shop {
      * */
     private void delay(){
         try{
+            System.out.println(Thread.currentThread().getName());
             Thread.sleep(3000);
         }catch(Exception e){
             e.printStackTrace();

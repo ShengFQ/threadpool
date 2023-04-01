@@ -1,4 +1,4 @@
-package com.shengfq.serilize;
+package com.shengfq.serilize.fastjson;
 
 import lombok.ToString;
 
