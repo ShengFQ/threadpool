@@ -1,11 +1,7 @@
 package com.shengfq.pool5;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * ClassName: ThreadPoolTest
@@ -17,12 +13,43 @@ import java.util.concurrent.TimeUnit;
 public class ThreadPoolTest {
 
     public static void main(String[] args) throws Exception {
-        testCachedThreadPool();
+        ThreadPoolTest threadPoolTest=new ThreadPoolTest();
+        ExecutorService executor=threadPoolTest.testFixedThreadPool();
+        testThreadPool(executor);
+
+        ExecutorService executor2=threadPoolTest.testSingleThreadPool();
+        testThreadPool(executor2);
+
+        ExecutorService  executor3=threadPoolTest.testCachedThreadPool();
+        testThreadPool(executor3);
+
+        ExecutorService executor4=threadPoolTest.testScheduledThreadPool();
+        testThreadPool(executor4);
     }
 
-    private static void testCachedThreadPool() throws Exception{
+    //允许请求队列长度为Integer.MAX_VALUE可能会堆积大量请求从而导致OOM
+    private  ExecutorService testFixedThreadPool() throws Exception{
+        ExecutorService executor = Executors.newFixedThreadPool(10);
+        return executor;
+    }
+    //允许请求队列长度为Integer.MAX_VALUE可能会堆积大量请求从而导致OOM
+    private  ExecutorService testSingleThreadPool() throws Exception{
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        return executor;
+    }
+    //允许创建线程数量为Integer.MAX_VALUE可能会创建大量线程从而导致OOM
+    private  ExecutorService testCachedThreadPool() throws Exception{
         ExecutorService executor = Executors.newCachedThreadPool();
-        for (int i = 0; i < 5; i++) {
+        return executor;
+    }
+    //允许创建线程数量为Integer.MAX_VALUE可能会创建大量线程从而导致OOM
+    private  ExecutorService testScheduledThreadPool() throws Exception{
+        ExecutorService executor = Executors.newScheduledThreadPool(10);
+        return executor;
+    }
+
+    private static void testThreadPool(ExecutorService executor) throws Exception{
+        for (int i = 0; i < 1000; i++) {
             final int index = i;
             Thread.sleep(4000);
             executor.execute(new Runnable() {
@@ -33,45 +60,5 @@ public class ThreadPoolTest {
             });
         }
         executor.shutdown();
-    }
-
-    public static void testFixedThreadPool() throws InterruptedException {
-
-        ExecutorService executor = Executors.newFixedThreadPool(1);
-
-        for (int i = 0; i < 1000; i++) {
-            final int index = i;
-            executor.execute(() -> {
-                try {
-                    Thread.sleep(1 * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println(Thread.currentThread().getName() + "  " + index);
-            });
-        }
-        executor.shutdown();
-    }
-
-    public static void method_02() {
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
-
-        executor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                long start = new Date().getTime();
-                System.out.println("scheduleAtFixedRate 开始执行时间:" +
-                        DateFormat.getTimeInstance().format(new Date()));
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                long end = new Date().getTime();
-                System.out.println("scheduleAtFixedRate 执行花费时间=" + (end - start) / 1000 + "m");
-                System.out.println("scheduleAtFixedRate 执行完成时间：" + DateFormat.getTimeInstance().format(new Date()));
-                System.out.println("======================================");
-            }
-        }, 1, 5, TimeUnit.SECONDS);
     }
 }
