@@ -12,14 +12,27 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 public class Test {
-    private static String content="00:12:22";
+    public static class TestSimpleDateFormatThreadSafe extends Thread {
+        @Override
+        public void run() {
+            while(true) {
+                try {
+                    this.join(2000);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+                System.out.println(this.getName() + ":" + DateUtil.parse("2019-01-10 00:00:00"));
+            }
+        }
+    }
 	public static void main(String[] args) {
-      //  testCalendar();
-      //  testCalendar2();
-       // String value=formatString(content);
-        String value=subString(content);
-        System.out.println(value);
+        for(int i = 0; i < 3; i++){
+            new TestSimpleDateFormatThreadSafe().start();
+        }
 	}
+	/**
+     *
+     * */
 	private static void testStringToDate() {
         String s = "2017-05-25";
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
