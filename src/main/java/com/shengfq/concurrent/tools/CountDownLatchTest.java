@@ -1,4 +1,4 @@
-package com.shengfq.pool5;
+package com.shengfq.concurrent.tools;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -17,7 +17,7 @@ public class CountDownLatchTest {
      * 其实CountDownLatch它本身就是一个倒数计数器，我们把初始的count值设置为3。D运行的时候，首先调用该countDownLatch.await()方法检查计数器的值是否为0，如果不是0则保持等待状态. A、B、C 运行完毕后，分别使用countDownLatch.countDown()方法将倒数计数器减1。计数器将减为 0，然后通知await()方法结束等待，D开始继续执行。
      * */
     public static void main(String[] args) {
-        int count=3;
+        int count=6;
         CountDownLatch countDownLatch=new CountDownLatch(count);
         Thread D=new Thread(()->{
             System.out.println("D等待其他线程执行完成");
@@ -30,7 +30,7 @@ public class CountDownLatchTest {
             }
         });
 
-        for(char threadName='a';threadName<='c';threadName++){
+        for(char threadName='a';threadName<='f';threadName++){
             final String name=String.valueOf(threadName);
             Thread t=new Thread(()->{
                 System.out.println(name+"正在运行");

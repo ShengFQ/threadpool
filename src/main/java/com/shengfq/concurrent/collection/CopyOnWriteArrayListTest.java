@@ -15,7 +15,7 @@ public class CopyOnWriteArrayListTest {
      * */
    // private static final ArrayList cowList = new ArrayList();
     private static final CopyOnWriteArrayList cowList = new CopyOnWriteArrayList();
-    private static CountDownLatch latch = new CountDownLatch(1);
+    private static CountDownLatch latch = new CountDownLatch(100);
 
     public static void readList() throws InterruptedException {
         Thread rThread = new Thread(new Runnable() {

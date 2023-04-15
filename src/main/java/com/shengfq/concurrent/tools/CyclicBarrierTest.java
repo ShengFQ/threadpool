@@ -1,4 +1,4 @@
-package com.shengfq.pool5;
+package com.shengfq.concurrent.tools;
 
 import java.util.Random;
 import java.util.concurrent.BrokenBarrierException;
@@ -13,15 +13,17 @@ import java.util.concurrent.CyclicBarrier;
  */
 public class CyclicBarrierTest {
     public static void main(String[] args) {
+        System.out.println("main thread is running");
         runABCWhenAllReady();
+        System.out.println("main thread run over");
     }
 
 
     public static void runABCWhenAllReady() {
-        int count = 3;
+        int count = 4;
         CyclicBarrier cyclicBarrier = new CyclicBarrier(count);
         Random random = new Random();
-        for (char threadName = 'A'; threadName <= 'C' ; threadName++) {
+        for (char threadName = 'A'; threadName <= 'D' ; threadName++) {
             final String name = String.valueOf(threadName);
             new Thread(() -> {
                 int prepareTime = random.nextInt(10000);
