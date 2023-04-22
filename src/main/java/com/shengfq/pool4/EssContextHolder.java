@@ -11,7 +11,7 @@ public class EssContextHolder {
     /**
      * sid
      */
-    private final static ThreadLocal<String> SID = new ThreadLocal<>();
+    private final static ThreadLocal<Long> SID = new ThreadLocal<>();
 
     /**
      * token
@@ -33,14 +33,14 @@ public class EssContextHolder {
      *
      * @param sid
      */
-    public static void setSID(String sid) {
+    public static void setSID(Long sid) {
         EssContextHolder.SID.set(sid);
     }
 
     /**
      * 获取SID
      */
-    public static String getSID() {
+    public static Long getSID() {
         return EssContextHolder.SID.get();
     }
 
@@ -87,5 +87,12 @@ public class EssContextHolder {
      */
     public static String getUnionId() {
         return EssContextHolder.UNION_ID.get();
+    }
+
+    /**
+     * 为了防止内存泄漏进行变量移除API
+     * */
+    public static void removeSid(){
+        EssContextHolder.SID.remove();
     }
 }

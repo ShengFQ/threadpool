@@ -10,11 +10,19 @@ public class BinaryTree<T extends Comparable<T>> {
 	 * */
 	private BSTNode<T> mRoot;
 
+	public BSTNode<T> getRoot() {
+		return mRoot;
+	}
+
+	public void setRoot(BSTNode<T> mRoot) {
+		this.mRoot = mRoot;
+	}
+
 	/**
 	 * 定义 对于任何一个不为空的左节点的值,左子树上所有的节点的值均小于它的跟节点的值
 	 * 对于任意节点的右子树不为空,则右子树上的所有节点的值均大于它的根节点的值. 左右子树叶分别是二叉搜索树 没有键值相等的节点
 	 */
-	public class BSTNode<T extends Comparable<T>> {
+	public static class BSTNode<T extends Comparable<T>> {
 		T key;
 		BSTNode<T> left;
 		BSTNode<T> right;
@@ -27,6 +35,21 @@ public class BinaryTree<T extends Comparable<T>> {
 			this.right = right;
 			this.parent = parent;
 		}
+	}
+
+	public static void main(String[] args) {
+		BinaryTree<Integer> bt1 = new BinaryTree<Integer>();
+		bt1.insert(1);
+		bt1.insert(2);
+		bt1.insert(3);
+		bt1.insert(4);
+		bt1.insert(5);
+		bt1.insert(6);
+		bt1.print();
+		//bt1.preOrder();
+		//bt1.inOrder();
+		//bt1.postOrder();
+		System.out.println("翻转二叉树");
 	}
 
 	/**
@@ -122,7 +145,7 @@ public class BinaryTree<T extends Comparable<T>> {
 
 	/*
 	 * 插入
-	 * 
+	 *
 	 * *
 	 */
 	private void insert(BinaryTree<T> bst, BSTNode<T> z) {
@@ -153,16 +176,17 @@ public class BinaryTree<T extends Comparable<T>> {
 
 	public void insert(T key) {
 		BSTNode<T> z = new BSTNode<T>(key, null, null, null);
-		if (z != null)
+		if (z != null) {
 			insert(this, z);
+		}
 	}
 
 	/*
 	 * 删除 *
 	 */
+
 	/*
 	 * 删除结点(z)，并返回被删除的结点
-	 * 
 	 * 参数说明： bst 二叉树 z 删除的结点
 	 */
 	private BSTNode<T> remove(BinaryTree<T> bst, BSTNode<T> z) {
@@ -197,7 +221,7 @@ public class BinaryTree<T extends Comparable<T>> {
 
 	/*
 	 * 删除结点(z)，并返回被删除的结点
-	 * 
+	 *
 	 * 参数说明： tree 二叉树的根结点 z 删除的结点
 	 */
 	public void remove(T key) {
@@ -290,14 +314,12 @@ public class BinaryTree<T extends Comparable<T>> {
 
 	/*
 	 * 打印"二叉查找树"
-	 * 
+	 *
 	 * key -- 节点的键值 direction -- 0，表示该节点是根节点; -1，表示该节点是它的父结点的左孩子;
 	 * 1，表示该节点是它的父结点的右孩子。
 	 */
 	private void print(BSTNode<T> tree, T key, int direction) {
-
 		if (tree != null) {
-
 			if (direction == 0) // tree是根节点
 				System.out.printf("%2d is root\n", tree.key);
 			else
@@ -335,16 +357,17 @@ public class BinaryTree<T extends Comparable<T>> {
 		mRoot = null;
 	}
 
-	public static void main(String[] args) {
-		BinaryTree<Integer> bt1 = new BinaryTree<Integer>();
-		bt1.insert(1);
-		bt1.insert(5);
-		bt1.insert(4);
-		bt1.insert(3);
-		bt1.insert(2);
-		bt1.insert(6);
-		bt1.preOrder();
-		//bt1.inOrder();
-		//bt1.postOrder();
+	/**
+	 * 翻转二叉树,就是将左右的分支节点进行互换
+	 * */
+	public BSTNode invertTree(BSTNode mRoot) {
+		if (mRoot == null)
+			return null;
+		BSTNode left=null,right=null;
+		left=invertTree(mRoot.left);
+		right = invertTree(mRoot.right);
+		mRoot.left=right;
+		mRoot.right=left;
+		return mRoot;
 	}
 }

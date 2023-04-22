@@ -40,8 +40,14 @@ public class ExecuteTaskUtils {
      * @param callback
      */
     public static void submitTask(ITask task, ICallback callback) {
+        Long sid = EssContextHolder.getSID();
+        String token = EssContextHolder.getToken();
+        String unionId = EssContextHolder.getUnionId();
         getInstance().submitTask(() -> {
             try {
+                EssContextHolder.setSID(sid);
+                EssContextHolder.setToken(token);
+                EssContextHolder.setUnionId(unionId);
                boolean result= task.executeTask();
                 if (callback != null) {
                     callback.callback(result);

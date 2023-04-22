@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * 测试 ThreadLocal类的功能
@@ -25,18 +27,20 @@ public class TestThreadLocal {
     }
 
     private static void test(){
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
         for (int i=1;i<31;i++){
             final int d=i;
-                new Thread(() -> {
+                executorService.submit(() -> {
                     String str = "2023-04-" + d;
                     try {
                       Date date=  df.get().parse(str);
-                      System.out.printf("%s : %s \n",d,date.getDate());
+                      System.out.printf("%s : %s \n",d,date);
                     }catch (ParseException e){
                         e.printStackTrace();
                     }
-                }).start();
+                });
         }
+        executorService.shutdown();
     }
 
 }
