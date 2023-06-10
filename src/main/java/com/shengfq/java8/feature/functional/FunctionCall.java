@@ -1,6 +1,5 @@
-package com.shengfq.functional;
+package com.shengfq.java8.feature.functional;
 
-import java.util.Map;
 import java.util.function.*;
 
 /**

@@ -1,4 +1,4 @@
-package com.shengfq.functional;
+package com.shengfq.java8.feature.functional;
 /**
  * 自定义函数式接口
  * */

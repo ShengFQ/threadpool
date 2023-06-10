@@ -1,11 +1,10 @@
-package com.shengfq.functional;
+package com.shengfq.java8.feature.functional;
 
-
-import cn.hutool.core.collection.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+
+import cn.hutool.core.collection.CollectionUtil;
 
 public class Filter<T> {
     public static <T> List<T> filter(List<T> list, BooleanFunctionalInterface b){
