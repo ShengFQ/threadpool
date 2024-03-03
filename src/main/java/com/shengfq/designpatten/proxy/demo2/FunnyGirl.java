@@ -6,7 +6,8 @@ package com.shengfq.designpatten.proxy.demo2;
  * @author shengfq
  * @date: 2024/1/14 2:51 下午
  */
-public class FunnyGirl implements BeautifulWomen {
+public class FunnyGirl extends ProxyMan {
+
   /**
    * 代理行为1
    */
