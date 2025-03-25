@@ -22,8 +22,12 @@ public class KeyboardFactory {
 
     public static void main(String[] args) {
         KeyboardFactory keyboardFactory = new KeyboardFactory();
-        Keyboard lenovoKeyboard = keyboardFactory.getInstance(1);
-        lenovoKeyboard.print();
+        Keyboard keyboard = keyboardFactory.getInstance(1);
+        keyboard.print();
+        keyboard = keyboardFactory.getInstance(2);
+        keyboard.print();
+        keyboard = keyboardFactory.getInstance(3);
+        keyboard.print();
     }
 
 }

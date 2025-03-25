@@ -24,12 +24,12 @@ public class TestApp {
 		p1 = factory1.createProduct();
 		p2 = factory2.createProduct();
 
-		System.out.println("product1 ");
+		System.out.println("apple product create ");
 		p1.grow();
 		p1.plant();
 		p1.harvest();
 
-		System.out.println("product2 ");
+		System.out.println("grape product create ");
 		p2.plant();
 		p2.grow();
 		p2.harvest();;
