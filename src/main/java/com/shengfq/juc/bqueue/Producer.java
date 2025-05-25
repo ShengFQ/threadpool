@@ -1,4 +1,4 @@
-package com.shengfq.juc;
+package com.shengfq.juc.bqueue;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 生产者线程
- * 
+ *
  * @author jackyuj
  */
 public class Producer implements Runnable {

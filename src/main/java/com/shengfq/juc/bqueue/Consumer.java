@@ -1,11 +1,11 @@
-package com.shengfq.juc;
+package com.shengfq.juc.bqueue;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
  * 消费者线程
- * 
+ *
  * @author jackyuj
  */
 public class Consumer implements Runnable {

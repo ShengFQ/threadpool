@@ -1,4 +1,4 @@
-package com.shengfq.juc;
+package com.shengfq.juc.bqueue;
 
 import java.util.Scanner;
 import java.util.concurrent.*;
