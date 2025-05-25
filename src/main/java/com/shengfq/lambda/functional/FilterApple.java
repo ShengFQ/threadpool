@@ -14,7 +14,14 @@ import java.util.function.Supplier;
  * 将接口作为参数传递,在运行时根据传递不同的实现类对象来达到传递不同行为的目的.
  * */
 public class FilterApple {
-
+   static List<Apple> list=new ArrayList<>();
+    static{
+        Apple apple1=new Apple("green",120);
+        Apple apple2=new Apple("red",160);
+        Apple apple3=new Apple("green",160);
+        Apple apple4=new Apple("red",110);
+        list.add(apple1);list.add(apple2);list.add(apple3);list.add(apple4);
+    }
     public static void main(String[] args) {
         testFunctional();
     }
@@ -42,12 +49,6 @@ public class FilterApple {
      * 1.自定义函数式接口
      * */
     public static void testFunctionalDef(){
-        Apple apple1=new Apple("green",120);
-        Apple apple2=new Apple("red",160);
-        Apple apple3=new Apple("green",160);
-        Apple apple4=new Apple("red",110);
-        List<Apple> list=new ArrayList<>();
-        list.add(apple1);list.add(apple2);list.add(apple3);list.add(apple4);
         //调用foreach
         System.out.println("调用foreach 打印元素的列表:");
         forEach(list,(item)->System.out.println(item));
